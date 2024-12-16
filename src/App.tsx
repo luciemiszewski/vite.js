@@ -32,36 +32,25 @@ function App() {
     },
   ];
 
-  const [count, setCount] = useState(0);
-  const handleNext = () => {
-    if (count < pokemonList.length - 1) {
-      setCount(count + 1);
-    }
-  };
+  const [pokemonIndex, setPokemonIndex] = useState(0);
 
-  const handlePrevious = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  };
 
   return (
-    <>
-      <div>
-        <PokemonCard pokemon={pokemonList[count]} />
-      </div>
-      {count > 0 && (
-        <button type="button" onClick={handlePrevious}>
-          Précédent
-        </button>
-      )}
-      {count < pokemonList.length - 1 && (
-        <button type="button" onClick={handleNext}>
-          Suivant
-        </button>
-      )}
-    </>
+    <div>
+      <nav>
+      {pokemonList.map((pokemon, index) => (
+          <button 
+            key={pokemon.name}
+            onClick={() => setPokemonIndex(index)} 
+          >
+            {pokemon.name}
+          </button>
+        ))}
+      </nav>
+      <PokemonCard pokemon={pokemonList[pokemonIndex]} />
+    </div>
   );
 }
+
 
 export default App;
